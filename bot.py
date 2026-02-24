@@ -20,8 +20,7 @@ with open("tariffs.json", "r", encoding="utf-8") as f:
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
-main_kb = ReplyKeyboardMarkup(resize_keyboard=True)
-main_kb.add(KeyboardButton("Старт"))
+
 
 
 # ===================== STATES =====================
@@ -98,14 +97,9 @@ def calculate_premium(sum_constr, sum_finish, material, pech, novoe, gr1, gr23):
 # ===================== HANDLERS =====================
 
 @dp.message_handler(commands=['start'])
-@dp.message_handler(lambda message: message.text == "Старт", state="*")
-async def cmd_start(message: types.Message, state: FSMContext):
-    await state.finish()
+async def cmd_start(message: types.Message):
     await Form.sum_constr.set()
-    await message.answer(
-        "Привет! Введите сумму КОНСТРУКТИВА:",
-        reply_markup=main_kb
-    )
+    await message.answer("Привет! Введите сумму КОНСТРУКТИВА:")
 
 
 @dp.message_handler(state=Form.sum_constr)
