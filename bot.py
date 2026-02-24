@@ -13,9 +13,7 @@ from aiogram.utils import executor
 #                 ЗАГРУЗКА БОТА И ТАРИФОВ
 # ============================================================
 
-TOKEN = os.getenv("TELEGRAM_TOKEN")
-if not TOKEN:
-    raise RuntimeError("Установи переменную окружения TELEGRAM_TOKEN")
+TOKEN = "8332042808:AAEZ784GJ4Y2Gg21BWryzf9syxq5aZIVEbo"
 
 with open("tariffs.json", "r", encoding="utf-8") as f:
     TARIFFS = json.load(f)
