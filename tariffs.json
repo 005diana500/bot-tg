@@ -1,0 +1,31 @@
+﻿{
+  "дерево": {
+    "constructive": [
+      { "min": 0, "max": 500000, "tariff": 0.6405 },
+      { "min": 500001, "max": 1500000, "tariff": 0.6027 },
+      { "min": 1500001, "max": 5000000, "tariff": 0.4935 },
+      { "min": 5000001, "max": null, "tariff": 0.4568 }
+    ],
+    "finishing": [
+      { "min": 0, "max": 500000, "tariff": 0.6405 },
+      { "min": 500001, "max": 1500000, "tariff": 0.6027 },
+      { "min": 1500001, "max": 5000000, "tariff": 0.4935 },
+      { "min": 5000001, "max": null, "tariff": 0.4568 }
+    ]
+  },
+
+  "камень": {
+    "constructive": [
+      { "min": 0, "max": 500000, "tariff": 0.6405 },
+      { "min": 500001, "max": 1500000, "tariff": 0.5040 },
+      { "min": 1500001, "max": 5000000, "tariff": 0.4095 },
+      { "min": 5000001, "max": null, "tariff": 0.3150 }
+    ],
+    "finishing": [
+      { "min": 0, "max": 500000, "tariff": 0.6405 },
+      { "min": 500001, "max": 1500000, "tariff": 0.5040 },
+      { "min": 1500001, "max": 5000000, "tariff": 0.4095 },
+      { "min": 5000001, "max": null, "tariff": 0.3150 }
+    ]
+  }
+}
