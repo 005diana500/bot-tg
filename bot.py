@@ -1,4 +1,3 @@
-import os
 import json
 from decimal import Decimal
 from aiogram import Bot, Dispatcher, types
@@ -9,11 +8,11 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils import executor
 
 
-# ============================================================
-#                 ЗАГРУЗКА БОТА И ТАРИФОВ
-# ============================================================
+# ================== ВСТАВЬ ТОКЕН НИЖЕ ==================
 
 TOKEN = "8332042808:AAEZ784GJ4Y2Gg21BWryzf9syxq5aZIVEbo"
+
+# =======================================================
 
 with open("tariffs.json", "r", encoding="utf-8") as f:
     TARIFFS = json.load(f)
@@ -22,9 +21,7 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
-# ============================================================
-#                        STATES
-# ============================================================
+# ===================== STATES =====================
 
 class Form(StatesGroup):
     sum_constr = State()
@@ -36,9 +33,7 @@ class Form(StatesGroup):
     risk_gr23 = State()
 
 
-# ============================================================
-#             УТИЛИТЫ
-# ============================================================
+# ===================== UTILITIES =====================
 
 def parse_amount(text: str) -> Decimal:
     txt = text.lower().strip().replace(" ", "").replace(",", ".")
@@ -89,17 +84,15 @@ def calculate_premium(sum_constr, sum_finish, material, pech, novoe, gr1, gr23):
     add_gr1 = Decimal("0.100") if gr1 else Decimal("0")
     add_gr23 = Decimal("0.060") if gr23 else Decimal("0")
 
-    P_gr1 = ((S_total) * add_gr1 / Decimal("100")).quantize(Decimal("0.01"))
-    P_gr23 = ((S_total) * add_gr23 / Decimal("100")).quantize(Decimal("0.01"))
+    P_gr1 = (S_total * add_gr1 / Decimal("100")).quantize(Decimal("0.01"))
+    P_gr23 = (S_total * add_gr23 / Decimal("100")).quantize(Decimal("0.01"))
 
     total = P_constr + P_finish + P_gr1 + P_gr23
 
     return T_constr_final, T_fin_final, P_constr, P_finish, P_gr1, P_gr23, total
 
 
-# ============================================================
-#                 HANDLERS
-# ============================================================
+# ===================== HANDLERS =====================
 
 @dp.message_handler(commands=['start'])
 async def cmd_start(message: types.Message):
