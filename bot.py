@@ -8,12 +8,13 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils import executor
 
 
-# ================== ВСТАВЬ ТОКЕН НИЖЕ ==================
+import os
 
-TOKEN = "8332042808:AAEZ784GJ4Y2Gg21BWryzf9syxq5aZIVEbo"
+TOKEN = os.getenv("BOT_TOKEN")
 
-# =======================================================
-
+if not TOKEN:
+    raise ValueError("Не задана переменная окружения BOT_TOKEN")
+    
 with open("tariffs.json", "r", encoding="utf-8") as f:
     TARIFFS = json.load(f)
 
