@@ -98,12 +98,17 @@ def calculate_premium(sum_constr, sum_finish, material, pech, novoe, gr1, gr23):
 
 # Запуск с любого сообщения, если нет активного состояния
 @dp.message_handler(state=None)
-async def start_any(message: types.Message, state: FSMContext):
+async def start_from_anything(message: types.Message, state: FSMContext):
     await Form.sum_constr.set()
-    await message.answer(
-        "Привет! Введите сумму КОНСТРУКТИВА:",
-        reply_markup=main_kb
-    )
+    await message.answer("Привет! Введите сумму КОНСТРУКТИВА:")
+
+
+# Команда "стоп" — полный перезапуск
+@dp.message_handler(lambda message: message.text.lower() == "стоп", state="*")
+async def stop_and_restart(message: types.Message, state: FSMContext):
+    await state.finish()
+    await Form.sum_constr.set()
+    await message.answer("Привет! Введите сумму КОНСТРУКТИВА:")
 
 
 # Команда СТОП — перезапуск расчёта
